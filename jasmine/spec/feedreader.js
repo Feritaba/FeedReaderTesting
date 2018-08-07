@@ -35,6 +35,7 @@ $(function() {
 			for(let feed of allFeeds) {
 				expect(feed.url).toBeDefined();
 				expect(feed.url.length).not.toBe(0);
+
 			}
 		});
 
@@ -52,15 +53,14 @@ $(function() {
 
 	/* TODO: Write a new test suite named "The menu" */
 	describe('The menu', function(){
-
+		const body = $('body');
 		/* TODO: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
-		it('is hidden', function(){
-			const body = document.querySelector('body');
-			expect(body.classList.contains('menu-hidden')).toBe(true);
+		it('is hidden by default', function(){
+			expect(body.hasClass('menu-hidden')).toBe(true);
 		});
 
 		/* TODO: Write a test that ensures the menu changes
@@ -68,15 +68,14 @@ $(function() {
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
-		it('is hide/show', function(){
-			const body = document.querySelector('body');
-			const menu = document.querySelector('.menu-icon-link');
+		it('changes hide/show when clicked', function(){
+			const menu = $('.menu-icon-link');
 
 			menu.click();
-			expect(body.classList.contains('menu-hidden')).toBe(false);
+			expect(body.hasClass('menu-hidden')).toBe(false);
 
 			menu.click();
-			expect(body.classList.contains('menu-hidden')).toBe(true);
+			expect(body.hasClass('menu-hidden')).toBe(true);
 		});
 	});
 
@@ -90,19 +89,56 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
 		beforeEach(function(done){
-			loadFeed(0, done);
+			loadFeed(0, function(){
+				done();
+			});
+			
 		});
-		it('completes work', function(){
-			const feed = document.querySelector('.feed');
-			expect(feed.children.length > 0).toBe(true);
+
+		it('has at least one entry', function(){
+			let entries = $('.feed .entry');
+			expect(entries.length).toBeGreaterThan(0);
 		});
 	});
 
 	/* TODO: Write a new test suite named "New Feed Selection" */
-	describe('New Feed Selection', function(){
-		/* TODO: Write a test that ensures when a new feed is loaded
-         * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
-         */
-	});     
+	describe('New Feed Selection', function() {
+		// const feed = document.querySelector('.feed');
+		// const firstFeed = [];
+		// /* TODO: Write a test that ensures when a new feed is loaded
+	//        * by the loadFeed function that the content actually changes.
+	//        * Remember, loadFeed() is asynchronous.
+	//        */
+		// beforeEach(function(done) {
+		// 	loadFeed(0);
+		// 	Array.from(feed.children).foreEach(function(entry){
+		// 		firstFeed.push(entry.innerText);
+		// 	});
+		// 	loadFeed(1, done);
+		// });
+
+		// it('content changes when new feed is loaded', function(done) {
+		// 	Array.from(feed.children).foreEach(function(entry,index){
+		// 		expect(entry.innerText === firstFeed[index]).toBe(false);
+		// 		done();
+		// 	});
+		// });
+		// });
+		let feedOne;
+		let feedTwo;
+		beforeEach(function(done){
+			loadFeed(0);
+			feedOne = $('.feed').html();
+			done();
+		});
+		afterEach(function(done){
+			loadFeed(1);
+			feedTwo = $('.feed').html();
+			done();
+		});
+		it('changes content', function(done) {
+			expect(feedOne).not.toEqual(feedTwo);
+			done();
+		});
+	});
 }());
