@@ -4,7 +4,7 @@ In this project we are given a web-based application that reads RSS feeds by Uda
 
 ## How to run the project
 
-You can click [here](https://feritaba.github.io/FeedReaderTesting/) to open the project.
+You can click clone the project using (https://github.com/Feritaba/FeedReaderTesting.git) to open the project.
 
 ## Technologies used
 
