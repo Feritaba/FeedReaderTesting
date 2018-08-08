@@ -71,9 +71,9 @@ $(function() {
 		let feedOne;
 		let feedTwo;
 		beforeEach(function(done){
-			loadFeed(1, function(){
+			loadFeed(0, function(){
 				feedOne = $('.feed').html();
-				loadFeed(0, function(){
+				loadFeed(1, function(){
 					feedTwo = $('.feed').html();
 					done();
 				});
