@@ -68,17 +68,6 @@ $(function() {
 	describe('New Feed Selection', function() {
 
 		// When a new feed is loaded the content changes
-		let feedOne;
-		let feedTwo;
-		beforeEach(function(done){
-			loadFeed(0, function(){
-				feedOne = $('.feed').html();
-				loadFeed(1, function(){
-					feedTwo = $('.feed').html();
-					done();
-				});
-			});
-		});
 
 		it('changes content', function(done) {
 			expect(feedOne).not.toEqual(feedTwo);
