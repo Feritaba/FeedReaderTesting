@@ -1,5 +1,5 @@
 // The names and URLs to all of the feeds we'd like available.
-var allFeeds = [
+let allFeeds = [
     {
         name: 'Udacity Blog',
         url: 'http://blog.udacity.com/feed'
@@ -23,7 +23,7 @@ function init() {
 
 // This function loads a feed using the Google Feed Reader API.
  function loadFeed(id, cb) {
-     var feedUrl = allFeeds[id].url,
+     let feedUrl = allFeeds[id].url,
          feedName = allFeeds[id].name;
 
      $.ajax({
@@ -33,7 +33,7 @@ function init() {
        contentType:"application/json",
        success: function (result, status){
 
-                var container = $('.feed'),
+                let container = $('.feed'),
                     title = $('.header-title'),
                     entries = result.feed.entries,
                     entriesLen = entries.length,
