@@ -56,7 +56,6 @@ $(function() {
 			loadFeed(0, function(){
 				done();
 			});
-			
 		});
 
 		it('has at least one entry', function(){
@@ -72,15 +71,15 @@ $(function() {
 		let feedOne;
 		let feedTwo;
 		beforeEach(function(done){
-			loadFeed(0);
-			feedOne = $('.feed').html();
-			done();
+			loadFeed(1, function(){
+				feedOne = $('.feed').html();
+				loadFeed(0, function(){
+					feedTwo = $('.feed').html();
+					done();
+				});
+			});
 		});
-		afterEach(function(done){
-			loadFeed(1);
-			feedTwo = $('.feed').html();
-			done();
-		});
+
 		it('changes content', function(done) {
 			expect(feedOne).not.toEqual(feedTwo);
 			done();
